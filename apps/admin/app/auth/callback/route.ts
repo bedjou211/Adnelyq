@@ -10,14 +10,16 @@ export async function GET(request: Request) {
     ? requestedNext
     : "/dashboard";
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabasePublishableKey =
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!code || !supabaseUrl || !supabaseAnonKey) {
+  if (!code || !supabaseUrl || !supabasePublishableKey) {
     return NextResponse.redirect(new URL("/login?error=invalid_callback", url.origin));
   }
 
   const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+  const supabase = createServerClient(supabaseUrl, supabasePublishableKey, {
     cookies: {
       getAll: () => cookieStore.getAll(),
       setAll: (items: Parameters<SetAllCookies>[0]) => {

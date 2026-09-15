@@ -1,9 +1,11 @@
 name: CI
 
+permissions:
+  contents: read
+
 on:
   pull_request:
   push:
-    branches: [main, develop, staging]
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}

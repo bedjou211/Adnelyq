@@ -76,4 +76,5 @@ make backend-check
 ```
 
 See [docs/development.md](docs/development.md) for environment and workflow
-details and [docs/architecture.md](docs/architecture.md) for system boundaries.
+details, [docs/architecture.md](docs/architecture.md) for system boundaries and
+[docs/cicd.md](docs/cicd.md) for promotion and deployment configuration.
