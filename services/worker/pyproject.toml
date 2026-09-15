@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adnelyq-worker"
+version = "0.1.0"
+description = "Background jobs for Adnelyq AI Commerce OS"
+requires-python = ">=3.10"
+dependencies = [
+  "celery[redis]>=5.4,<6",
+  "pydantic-settings>=2.7,<3"
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.14,<2",
+  "pytest>=8.3,<9",
+  "ruff>=0.9,<1"
+]
+
+[tool.setuptools.packages.find]
+include = ["worker*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+exclude = ["tests"]
